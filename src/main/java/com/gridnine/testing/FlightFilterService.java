@@ -1,5 +1,7 @@
 package com.gridnine.testing;
 
+
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,39 +12,44 @@ import java.util.List;
 зависимости от контекста выполнения операции фильтрации.
  */
 public class FlightFilterService {
-    private List<Flight> flightsInUse;
-    private List<Filter> filtersInUse;
+    private List<Flight> flightsInUse = Collections.emptyList();
+    private List<Filter> filtersInUse = Collections.emptyList();
 
 
     public List<Flight> getFilteredFlights() {
-        List<Flight> result = new LinkedList<>();
-        try {
-            for (Flight targetFlight :
-                    flightsInUse) {
-                boolean flightMatchFlag = true;
-                for (Filter filter :
-                        filtersInUse) {
-                    if (!filter.match(targetFlight)) {
-                        flightMatchFlag = false;
-                        break;
-                    }
-                }
-                if (flightMatchFlag) {
-                    result.add(targetFlight);
+        LinkedList<Flight> result = new LinkedList<>();
+
+        for (Flight targetFlight :
+                flightsInUse) {
+            boolean flightMatchFlag = true;
+            for (Filter filter :
+                    filtersInUse) {
+                if (!filter.match(targetFlight)) {
+                    flightMatchFlag = false;
+                    break;
                 }
             }
-        }catch (NullPointerException e){
-            e.getMessage();
-            e.printStackTrace();
+            if (flightMatchFlag) {
+                result.add(targetFlight);
+            }
         }
+
         return result;
     }
 
     public void setFiltersInUse(List<Filter> filtersInUse) {
-        this.filtersInUse = filtersInUse;
+        if (filtersInUse != null) {
+            this.filtersInUse = filtersInUse;
+        }else{
+            this.filtersInUse = Collections.emptyList();
+        }
     }
 
     public void setFlightsInUse(List<Flight> flightsInUse) {
-        this.flightsInUse = flightsInUse;
+        if (flightsInUse != null) {
+            this.flightsInUse = flightsInUse;
+        }else{
+            this.flightsInUse = Collections.emptyList();
+        }
     }
 }
