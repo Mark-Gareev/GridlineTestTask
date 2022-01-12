@@ -8,6 +8,9 @@ import java.util.List;
 public class SegmentStartsAfterFinishesFilter implements Filter {
     @Override
     public boolean match(Flight flight) {
+        if(flight == null){
+            return false;
+        }
         List<Segment> segments = flight.getSegments();
         boolean result = true;
         for (Segment segment:

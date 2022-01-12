@@ -7,6 +7,9 @@ import java.util.List;
 public class TimeBetweenSegmentsFilter implements Filter {
     @Override
     public boolean match(Flight flight) {
+        if(flight == null){
+            return false;
+        }
         List<Segment> segments = flight.getSegments();
         long timeCounter = 0;
         int segmentsSize = segments.size();

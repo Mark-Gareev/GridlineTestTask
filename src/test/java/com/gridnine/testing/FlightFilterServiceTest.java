@@ -14,9 +14,8 @@ public class FlightFilterServiceTest {
 
 
     @BeforeClass
-    public static void initializeTestFields() {
+    public static void initialize() {
         service = new FlightFilterService();
-        //testFlights length = 6, each one filter should winnow one flight
         testFlights = FlightBuilder.createFlights();
         service.setFlightsInUse(testFlights);
     }

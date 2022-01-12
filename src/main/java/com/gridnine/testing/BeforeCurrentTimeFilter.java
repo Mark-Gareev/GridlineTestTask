@@ -10,11 +10,15 @@ import java.util.List;
 public class BeforeCurrentTimeFilter implements Filter {
     @Override
     public boolean match(Flight flight) {
+        if(flight == null){
+            return false;
+        }
         List<Segment> segments = flight.getSegments();
         boolean result = true;
+        LocalDateTime now = LocalDateTime.now();
         for (Segment segment:
              segments) {
-            if(segment.getDepartureDate().isBefore(LocalDateTime.now())){
+            if(segment.getDepartureDate().isBefore(now)){
                 result = false;
                 break;
             }
