@@ -1,6 +1,5 @@
 package com.gridnine.testing;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ public class SegmentStartsAfterFinishesFilter implements Filter {
         boolean result = true;
         for (Segment segment:
                 segments) {
-            if(segment.getDepartureDate().isBefore(segment.getArrivalDate())){
+            if(segment.getDepartureDate().isAfter(segment.getArrivalDate())){
                 result = false;
                 break;
             }

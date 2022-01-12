@@ -14,7 +14,7 @@ public class BeforeCurrentTimeFilter implements Filter {
         boolean result = true;
         for (Segment segment:
              segments) {
-            if(segment.getArrivalDate().isBefore(LocalDateTime.now())){
+            if(segment.getDepartureDate().isBefore(LocalDateTime.now())){
                 result = false;
                 break;
             }

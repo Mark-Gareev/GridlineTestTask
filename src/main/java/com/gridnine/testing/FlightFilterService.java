@@ -13,9 +13,6 @@ public class FlightFilterService {
     private List<Flight> flightsInUse;
     private List<Filter> filtersInUse;
 
-    private boolean useFilter(Filter filter, Flight flight) {
-        return filter.match(flight);
-    }
 
     public List<Flight> getFilteredFlights() {
         List<Flight> result = new LinkedList<>();
