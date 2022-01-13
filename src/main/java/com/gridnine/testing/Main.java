@@ -1,8 +1,6 @@
 package com.gridnine.testing;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -11,22 +9,24 @@ public class Main {
         FlightFilterService flightFilterService = new FlightFilterService();
         flightFilterService.setFlightsInUse(FlightBuilder.createFlights());
 
-        List<Filter>filters = Collections.singletonList(new BeforeCurrentTimeFilter());
+        List<FlightFilter> flightFilters = Collections.singletonList(new BeforeCurrentTimeFilter());
         System.out.println("Sort flights witch depart in the past");
-        flightFilterService.setFiltersInUse(filters);
+        flightFilterService.setFiltersInUse(flightFilters);
         List<Flight>filteredFlights = flightFilterService.getFilteredFlights();
-        filteredFlights.stream().forEach(System.out::println);
+        filteredFlights.forEach(System.out::println);
 
-        filters = Collections.singletonList(new SegmentStartsAfterFinishesFilter());
+        flightFilters = Collections.singletonList(new SegmentStartsAfterFinishesFilter());
         System.out.println("Sort flights witch departs before it arrives");
-        flightFilterService.setFiltersInUse(filters);
+        flightFilterService.setFiltersInUse(flightFilters);
         filteredFlights = flightFilterService.getFilteredFlights();
-        filteredFlights.stream().forEach(System.out::println);
+        for (Flight filteredFlight : filteredFlights) {
+            System.out.println(filteredFlight);
+        }
 
-        filters = Collections.singletonList(new TimeBetweenSegmentsFilter());
-        flightFilterService.setFiltersInUse(filters);
+        flightFilters = Collections.singletonList(new TimeBetweenSegmentsFilter());
+        flightFilterService.setFiltersInUse(flightFilters);
         System.out.println("sort flights with more than two hours between segments");
         filteredFlights = flightFilterService.getFilteredFlights();
-        filteredFlights.stream().forEach(System.out::println);
+        filteredFlights.forEach(System.out::println);
     }
 }

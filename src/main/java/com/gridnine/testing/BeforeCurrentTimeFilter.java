@@ -1,13 +1,12 @@
 package com.gridnine.testing;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * class describing filter, witch winnow flights that starts before current time
  */
-public class BeforeCurrentTimeFilter implements Filter {
+public class BeforeCurrentTimeFilter implements FlightFilter {
     @Override
     public boolean match(Flight flight) {
         if(flight == null){

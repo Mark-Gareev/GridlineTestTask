@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class FlightFilterService {
     private List<Flight> flightsInUse = Collections.emptyList();
-    private List<Filter> filtersInUse = Collections.emptyList();
+    private List<FlightFilter> filtersInUse = Collections.emptyList();
 
 
     public List<Flight> getFilteredFlights() {
@@ -22,9 +22,9 @@ public class FlightFilterService {
         for (Flight targetFlight :
                 flightsInUse) {
             boolean flightMatchFlag = true;
-            for (Filter filter :
+            for (FlightFilter flightFilter :
                     filtersInUse) {
-                if (!filter.match(targetFlight)) {
+                if (!flightFilter.match(targetFlight)) {
                     flightMatchFlag = false;
                     break;
                 }
@@ -37,7 +37,7 @@ public class FlightFilterService {
         return result;
     }
 
-    public void setFiltersInUse(List<Filter> filtersInUse) {
+    public void setFiltersInUse(List<FlightFilter> filtersInUse) {
         if (filtersInUse != null) {
             this.filtersInUse = filtersInUse;
         }else{

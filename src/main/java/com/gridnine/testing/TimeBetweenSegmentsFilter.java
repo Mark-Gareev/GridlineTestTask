@@ -1,10 +1,9 @@
 package com.gridnine.testing;
 
 import java.time.Duration;
-import java.time.LocalTime;
 import java.util.List;
 
-public class TimeBetweenSegmentsFilter implements Filter {
+public class TimeBetweenSegmentsFilter implements FlightFilter {
     @Override
     public boolean match(Flight flight) {
         if(flight == null){

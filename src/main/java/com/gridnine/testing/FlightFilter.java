@@ -1,9 +1,9 @@
 package com.gridnine.testing;
 
 /**
- * Interface presents a filter of flights.
+ * Interface marking a filter of flights.
  */
-public interface Filter {
+public interface FlightFilter {
     /**
      * method to match flight with filter
      * @param flight - flight to analyse

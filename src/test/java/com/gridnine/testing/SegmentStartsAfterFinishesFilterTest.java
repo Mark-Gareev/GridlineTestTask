@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class SegmentStartsAfterFinishesFilterTest {
 
-    private static Filter filter;
+    private static FlightFilter flightFilter;
     private static Flight testFlight;
     private static Method createFlight;//adding from TestClasses with reflection for testing only;
 
@@ -23,7 +23,7 @@ public class SegmentStartsAfterFinishesFilterTest {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-        filter = new SegmentStartsAfterFinishesFilter();
+        flightFilter = new SegmentStartsAfterFinishesFilter();
     }
 
     @Test
@@ -36,7 +36,7 @@ public class SegmentStartsAfterFinishesFilterTest {
             fail();
         }
         assertFalse("match with departs after arriving,expected false",
-                filter.match(testFlight));
+                flightFilter.match(testFlight));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SegmentStartsAfterFinishesFilterTest {
             testFlight = (Flight) createFlight.invoke(null,
                     (Object) new LocalDateTime[]{LocalDateTime.now().minusDays(1), LocalDateTime.now().plusHours(1)});
             assertTrue("match with departs now,expected true",
-                    filter.match(testFlight));
+                    flightFilter.match(testFlight));
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -58,7 +58,7 @@ public class SegmentStartsAfterFinishesFilterTest {
             testFlight = (Flight) createFlight.invoke(null,
                     (Object) new LocalDateTime[]{LocalDateTime.now().plusDays(1),
                             LocalDateTime.now().plusDays(1).plusHours(1)});
-            assertTrue("match with departs after now,expected true", filter.match(testFlight));
+            assertTrue("match with departs after now,expected true", flightFilter.match(testFlight));
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -67,7 +67,7 @@ public class SegmentStartsAfterFinishesFilterTest {
 
     @Test
     public void matchWithNull() {
-        assertFalse("match with null expect false", filter.match(null));
+        assertFalse("match with null expect false", flightFilter.match(null));
     }
     @Test
     public void matchManyTimes(){
@@ -81,7 +81,7 @@ public class SegmentStartsAfterFinishesFilterTest {
         }
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < 500000;i++){
-            filter.match(testFlight);
+            flightFilter.match(testFlight);
         }
         long finishTime = System.currentTimeMillis();
 

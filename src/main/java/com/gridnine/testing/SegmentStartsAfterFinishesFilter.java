@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * class describing filter witch winnow flight with segments witch have departure date before arrival date.
  */
-public class SegmentStartsAfterFinishesFilter implements Filter {
+public class SegmentStartsAfterFinishesFilter implements FlightFilter {
     @Override
     public boolean match(Flight flight) {
         if(flight == null){
